@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="card-header">
-        #filtros
+        
     </div>
     <div class="card-body">
 

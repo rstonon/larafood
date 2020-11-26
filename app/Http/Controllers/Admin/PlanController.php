@@ -39,6 +39,7 @@ class PlanController extends Controller
 
     public function show($url)
     {
+        
         $plan = $this->repository->where('url', $url)->first();
 
         if(!$plan) {

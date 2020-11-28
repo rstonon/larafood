@@ -8,9 +8,11 @@
 
 @section('content')
     <div class="card-header">
-        
+
     </div>
     <div class="card-body">
+
+            @include('admin.includes.alerts')
 
             <div class="form-group">
                 <label>Nome:</label>
@@ -29,7 +31,7 @@
             @csrf
             @method('DELETE')
             <div class="form-group">
-                <button type="submit" class="btn bg-gradient-danger"><i class="fas fa-trash-alt"></i> Excluir</button>
+                <button type="submit" class="btn bg-gradient-danger" onclick="return confirm('Tem certeza que deseja excluir?');"><i class="fas fa-trash-alt"></i> Excluir</button>
             </div>
         </form>
     </div>

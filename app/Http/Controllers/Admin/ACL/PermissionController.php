@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\Admin\ACL;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUpdateModule;
-use App\Models\Module;
+use App\Http\Requests\StoreUpdatePermission;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
-class ModuleController extends Controller
+class PermissionController extends Controller
 {
     protected $repository;
 
-    public function __construct(Module $module)
+    public function __construct(Permission $permission)
     {
-        $this->repository = $module;
+        $this->repository = $permission;
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -23,10 +22,10 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $modules = $this->repository->paginate();
+        $permissions = $this->repository->paginate();
 
-        return view('admin.pages.modules.index', [
-            'modules' => $modules,
+        return view('admin.pages.permissions.index', [
+            'permissions' => $permissions,
         ]);
     }
 
@@ -37,7 +36,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.modules.create');
+        return view('admin.pages.permissions.create');
     }
 
     /**
@@ -46,11 +45,11 @@ class ModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateModule $request)
+    public function store(StoreUpdatePermission $request)
     {
         $this->repository->create($request->all());
 
-        return redirect()->route('modules.index')->with('toast_success', 'Módulo cadastrado com sucesso');
+        return redirect()->route('permissions.index')->with('toast_success', 'Permissão cadastrada com sucesso');
     }
 
     /**
@@ -61,12 +60,12 @@ class ModuleController extends Controller
      */
     public function show($id)
     {
-        if(!$module = $this->repository->find($id)) {
+        if(!$permission = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        return view('admin.pages.modules.show', [
-            'module' => $module,
+        return view('admin.pages.permissions.show', [
+            'permission' => $permission,
         ]);
     }
 
@@ -78,12 +77,12 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
-        if(!$module = $this->repository->find($id)) {
+        if(!$permission = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        return view('admin.pages.modules.edit', [
-            'module' => $module,
+        return view('admin.pages.permissions.edit', [
+            'permission' => $permission,
         ]);
     }
 
@@ -94,15 +93,15 @@ class ModuleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateModule $request, $id)
+    public function update(StoreUpdatePermission $request, $id)
     {
-        if(!$module = $this->repository->find($id)) {
+        if(!$permission = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        $module->update($request->all());
+        $permission->update($request->all());
 
-        return redirect()->route('modules.index')->with('toast_success', 'Módulo editado com sucesso');
+        return redirect()->route('permissions.index')->with('toast_success', 'Permissão editada com sucesso');
     }
 
     /**
@@ -113,23 +112,23 @@ class ModuleController extends Controller
      */
     public function destroy($id)
     {
-        if(!$module = $this->repository->find($id)) {
+        if(!$permission = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        $module->delete();
+        $permission->delete();
 
-        return redirect()->route('modules.index')->with('toast_success', 'Módulo deletado com sucesso');
+        return redirect()->route('permissions.index')->with('toast_success', 'Permissão deletada com sucesso');
     }
 
     public function search(Request $request)
     {
         $filters = $request->except('_token');
 
-        $modules = $this->repository->search($request->filter);
+        $permissions = $this->repository->search($request->filter);
 
-        return view('admin.pages.modules.index', [
-            'modules' => $modules,
+        return view('admin.pages.permissions.index', [
+            'permissions' => $permissions,
             'filters' => $filters,
         ]);
     }

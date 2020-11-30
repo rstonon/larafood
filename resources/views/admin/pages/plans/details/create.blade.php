@@ -20,10 +20,9 @@
     </div>
     <div class="card-body">
         <form action="{{ route('details.plan.store', $plan->url) }}" class="form" method="POST">
-            @csrf
 
             @include('admin.pages.plans.details._partials.form')
         </form>
     </div>
-
+    @include('sweetalert::alert')
 @stop

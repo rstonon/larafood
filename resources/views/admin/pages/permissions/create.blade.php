@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Planos')
+@section('title', 'Permissóes')
 
 @section('content_header')
-    <h1>Cadastrar Novo Plano</h1>
+    <h1>Cadastrar Nova Permissão</h1>
 @stop
 
 @section('content')
@@ -11,9 +11,9 @@
 
     </div>
     <div class="card-body">
-        <form action="{{ route('plans.store') }}" class="form" method="POST">
+        <form action="{{ route('permissions.store') }}" class="form" method="POST">
 
-            @include('admin.pages.plans._partials.form')
+            @include('admin.pages.permissions._partials.form')
 
         </form>
     </div>

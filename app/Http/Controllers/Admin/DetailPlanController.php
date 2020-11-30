@@ -56,7 +56,7 @@ class DetailPlanController extends Controller
 
         $plan->details()->create($request->all());
 
-        return redirect()->route('details.plan.index', $plan->url);
+        return redirect()->route('details.plan.index', $plan->url)->with('toast_success', 'Detalhe do Plano cadastrado com sucesso');
     }
 
     public function edit($urlPlan, $idDetail)
@@ -85,7 +85,7 @@ class DetailPlanController extends Controller
 
         $detail->update($request->all());
 
-        return redirect()->route('details.plan.index', $plan->url);
+        return redirect()->route('details.plan.index', $plan->url)->with('toast_success', 'Detalhe do Plano editado com sucesso');
     }
 
     public function show($urlPlan, $idDetail)
@@ -116,7 +116,7 @@ class DetailPlanController extends Controller
 
         return redirect()
                         ->route('details.plan.index', $plan->url)
-                        ->with('message', 'Registro Deletado com Sucesso!');
+                        ->with('toast_success', 'Detalhe do Plano deletado com sucesso');
     }
 
 }

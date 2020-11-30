@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdatePlan;
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PlanController extends Controller
 {
@@ -34,7 +35,7 @@ class PlanController extends Controller
     {
         $this->repository->create($request->all());
 
-        return redirect()->route('plans.index');
+        return redirect()->route('plans.index')->with('toast_success', 'Plano cadastrado com sucesso');
     }
 
     public function show($url)
@@ -69,7 +70,7 @@ class PlanController extends Controller
 
         $plan->delete();
 
-        return redirect()->route('plans.index');
+        return redirect()->route('plans.index')->with('toast_success', 'Plano deletado com sucesso');
     }
 
     public function search(Request $request)
@@ -107,6 +108,6 @@ class PlanController extends Controller
 
         $plan->update($request->all());
 
-        return redirect()->route('plans.index');
+        return redirect()->route('plans.index')->with('toast_success', 'Plano editado com sucesso');
     }
 }

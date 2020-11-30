@@ -1,9 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Módulos')
+@section('title', "Editar Módulo - {$module->name}")
 
 @section('content_header')
-    <h1>Cadastrar Novo Módulo</h1>
+
+<h1>Editar Módulo - <b>{{ $module->name }}</b></h1>
 @stop
 
 @section('content')
@@ -11,10 +12,10 @@
 
     </div>
     <div class="card-body">
-        <form action="{{ route('modules.store') }}" class="form" method="POST">
+        <form action="{{ route('modules.update', $module->id) }}" class="form" method="POST">
+            @method('PUT')
 
             @include('admin.pages.modules._partials.form')
-
         </form>
     </div>
     @include('sweetalert::alert')

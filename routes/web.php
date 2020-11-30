@@ -5,8 +5,10 @@ use App\Http\Controllers\Admin\{
     PlanController
 };
 use App\Http\Controllers\Admin\ACL\ModuleController;
+use App\Http\Controllers\Admin\ACL\PermissionController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +23,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
 
+    // Route Permissions
+    Route::any('permissions/search', [PermissionController::class, 'search'])->name('permissions.search');
+    Route::resource('permissions', PermissionController::class);
+
     // Route Modules
+    Route::any('modules/search', [ModuleController::class, 'search'])->name('modules.search');
     Route::resource('modules', ModuleController::class);
 
     // Route Details Plans

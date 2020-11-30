@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Planos')
+@section('title', 'Módulos')
 
 @section('content_header')
-    <h1>Plano - <b>{{ $plan->name }}</b></h1>
+    <h1>Módulo - <b>{{ $module->name }}</b></h1>
 @stop
 
 @section('content')
@@ -12,22 +12,16 @@
     </div>
     <div class="card-body">
 
-            @include('admin.includes.alerts')
-
             <div class="form-group">
                 <label>Nome:</label>
-            <input type="text" name="name" class="form-control" value="{{ $plan->name }}" disabled>
-            </div>
-            <div class="form-group">
-                <label>Preço:</label>
-                <input type="text" name="price" class="form-control" value="R$ {{ number_format($plan->price, 2, ',', '.') }}" disabled>
+            <input type="text" name="name" class="form-control" value="{{ $module->name }}" disabled>
             </div>
             <div class="form-group">
                 <label>Descrição:</label>
-                <input type="text" name="description" class="form-control" value="{{ $plan->description }}" disabled>
+                <input type="text" name="description" class="form-control" value="{{ $module->description }}" disabled>
             </div>
 
-        <form action="{{ route('plans.destroy', $plan->url) }}" method="POST">
+        <form action="{{ route('modules.destroy', $module->id) }}" method="POST">
             @csrf
             @method('DELETE')
             <div class="form-group">

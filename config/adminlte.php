@@ -241,6 +241,11 @@ return [
             'url'         => 'admin/modules',
             'icon'        => 'fas fa-id-badge',
         ],
+        [
+            'text'        => 'Permissões',
+            'url'         => 'admin/permissions',
+            'icon'        => 'fas fa-key',
+        ],
     ],
 
     /*

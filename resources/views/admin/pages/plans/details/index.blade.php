@@ -48,4 +48,5 @@
         @endif
 
     </div>
+    @include('sweetalert::alert')
 @stop

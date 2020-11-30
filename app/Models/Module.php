@@ -20,4 +20,28 @@ class Module extends Model
 
         return $results;
     }
+
+    //Faz a Vinculação para buscar as permissões
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
+
+    public function permissionsAvailable($filter = null)
+    {
+        $permissions = Permission::whereNotIn('permissions.id', function($query) {
+            $query->select('permission_id');
+            $query->from('module_permission');
+            $query->whereRaw("module_permission.module_id={$this->id}");
+        })
+        ->where(function($queryFilter) use ($filter) {
+            if ($filter) {
+                $queryFilter->where('permissions.name', 'LIKE', "%{$filter}%");
+            }
+        })
+        ->paginate();
+
+        return $permissions;
+    }
+
 }

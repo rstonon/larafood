@@ -1,15 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Módulos')
+@section('title', "Permissões do Módulo - {$module->name}")
 
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('plans.index') }}">Módulos</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('modules.index') }}">Módulos</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('modules.permissions', $module->id ) }}">Permissões</a></li>
     </ol>
 
-    <h1>Módulos</h1><br>
-    <a href="{{ route('modules.create') }}" class="btn bg-gradient-primary"><i class="fas fa-plus-circle"></i> Adicionar Novo Módulo</a>
+<h1>Permissões do Módulo - <b>{{ $module->name }}</b></h1><br>
+    <a href="{{ route('modules.permissions.available', $module->id) }}" class="btn bg-gradient-primary"><i class="fas fa-plus-circle"></i> Adicionar Nova Permissão</a>
 
 @stop
 
@@ -26,17 +27,15 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th width="200">Ações</th>
+                    <th width="50">Ações</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($modules as $module)
+                @foreach ($permissions as $permission)
                     <tr>
-                        <td>{{ $module->name }}</td>
+                        <td>{{ $permission->name }}</td>
                         <td>
-                            <a href="{{ route('modules.permissions', $module->id)}}" class="btn bg-gradient-primary"><i class="fas fa-key"></i></a>
-                            <a href="{{ route('modules.show', $module->id)}}" class="btn bg-gradient-warning"><i class="fas fa-eye"></i></a>
-                            <a href="{{ route('modules.edit', $module->id)}}" class="btn bg-gradient-info"><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('modules.edit', $module->id)}}" class="btn bg-gradient-danger"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -45,9 +44,9 @@
     </div>
     <div class="card-footer">
         @if (isset($filters))
-            {{ $modules->appends($filters)->links() }}
+            {{ $permissions->appends($filters)->links() }}
         @else
-            {{ $modules->links() }}
+            {{ $permissions->links() }}
         @endif
 
     </div>

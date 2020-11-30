@@ -4,8 +4,12 @@ use App\Http\Controllers\Admin\{
     DetailPlanController,
     PlanController
 };
-use App\Http\Controllers\Admin\ACL\ModuleController;
-use App\Http\Controllers\Admin\ACL\PermissionController;
+use App\Http\Controllers\Admin\ACL\{
+    ModuleController,
+    PermissionController,
+    PermissionModuleController,
+};
+
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,6 +26,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 */
 
 Route::group(['prefix' => 'admin'], function () {
+
+    // Route Permissions x Modules
+
+
+    Route::post('modules/{idModule}/permissions/store', [PermissionModuleController::class, 'attachPermissionsModule'])->name('modules.permissions.attach');
+    // Route::any('modules/{idModule}/permissions/search', [PermissionModuleController::class, 'permissionsAvailableSearch'])->name('modules.permissions.available.search');
+    Route::any('modules/{idModule}/permissions/create', [PermissionModuleController::class, 'permissionsAvailable'])->name('modules.permissions.available');
+    Route::get('modules/{idModule}/permissions', [PermissionModuleController::class, 'permissions'])->name('modules.permissions');
 
     // Route Permissions
     Route::any('permissions/search', [PermissionController::class, 'search'])->name('permissions.search');

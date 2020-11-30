@@ -20,4 +20,10 @@ class Permission extends Model
 
         return $results;
     }
+
+    //Faz a Vinculação para buscar os módulos
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class);
+    }
 }

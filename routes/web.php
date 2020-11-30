@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\{
     DetailPlanController,
     PlanController
 };
+use App\Http\Controllers\Admin\ACL\ModuleController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'admin'], function () {
+
+    // Route Modules
+    Route::resource('modules', ModuleController::class);
 
     // Route Details Plans
     Route::get('plans/{url}/details/create', [DetailPlanController::class, 'create'])->name('details.plan.create');

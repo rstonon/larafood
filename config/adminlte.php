@@ -236,6 +236,11 @@ return [
             'url'         => 'admin/plans',
             'icon'        => 'fas fa-th-list',
         ],
+        [
+            'text'        => 'Módulos',
+            'url'         => 'admin/modules',
+            'icon'        => 'fas fa-id-badge',
+        ],
     ],
 
     /*

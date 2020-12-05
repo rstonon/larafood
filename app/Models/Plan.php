@@ -16,6 +16,11 @@ class Plan extends Model
         return $this->hasMany(DetailPlan::class);
     }
 
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class);
+    }
+
     public function search($filter = null)
     {
         $results = $this
@@ -24,6 +29,23 @@ class Plan extends Model
                     ->paginate();
 
         return $results;
+    }
+
+    public function modulesAvailable($filter = null)
+    {
+        $modules = Module::whereNotIn('modules.id', function($query) {
+            $query->select('module_plan.module_id');
+            $query->from('module_plan');
+            $query->whereRaw("module_plan.plan_id={$this->id}");
+        })
+        ->where(function($queryFilter) use ($filter) {
+            if ($filter) {
+                $queryFilter->where('plan.name', 'LIKE', "%{$filter}%");
+            }
+        })
+        ->paginate();
+
+        return $modules;
     }
 
 }

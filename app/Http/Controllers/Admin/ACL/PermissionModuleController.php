@@ -67,8 +67,34 @@ class PermissionModuleController extends Controller
         return redirect()->route('modules.permissions', $module->id);
     }
 
-    public function permissionsAvailableSearch()
+    public function detachPermissionsModule($idModule, $idPermission)
     {
-        # code...
+        $module = $this->module->find($idModule);
+        $permission = $this->permission->find($idPermission);
+
+        if(!$module || !$permission) {
+            return redirect()->back();
+        }
+
+        $module->permissions()->detach($permission);
+
+        return redirect()->route('modules.permissions', $module->id);
+
+    }
+
+    public function modules($idPermission)
+    {
+        $permission = $this->permission->find($idPermission);
+
+        if(!$permission) {
+            return redirect()->back();
+        }
+
+        $modules = $permission->modules()->paginate();
+
+        return view('admin.pages.permissions.modules.modules', [
+            'permission' => $permission,
+             'modules' => $modules,
+        ]);
     }
 }

@@ -1,15 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Módulos')
+@section('title', "Módulos do Plano - {$plan->name}")
 
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('plans.index') }}">Módulos</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('plans.index') }}">Planos</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('plans.modules', $plan->id) }}">Módulos</a></li>
     </ol>
 
-    <h1>Módulos</h1><br>
-    <a href="{{ route('modules.create') }}" class="btn bg-gradient-primary"><i class="fas fa-plus-circle"></i> Adicionar Novo Módulo</a>
+<h1>Módulos do Plano - <b>{{ $plan->name }}</b></h1><br>
+    <a href="{{ route('plans.modules.available', $plan->id) }}" class="btn bg-gradient-primary"><i class="fas fa-plus-circle"></i> Adicionar Novo Módulo</a>
 
 @stop
 
@@ -26,7 +27,7 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th width="250">Ações</th>
+                    <th width="50">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,10 +35,7 @@
                     <tr>
                         <td>{{ $module->name }}</td>
                         <td>
-                            <a href="{{ route('modules.permissions', $module->id)}}" class="btn bg-gradient-primary"><i class="fas fa-key"></i></a>
-                            <a href="{{ route('modules.show', $module->id)}}" class="btn bg-gradient-warning"><i class="fas fa-eye"></i></a>
-                            <a href="{{ route('modules.edit', $module->id)}}" class="btn bg-gradient-info"><i class="fas fa-edit"></i></a>
-                            <a href="{{ route('modules.plans', $module->id)}}" class="btn bg-gradient-primary"><i class="fas fa-th-list"></i></a>
+                            <a href="{{ route('plans.module.detach', [$plan->id, $module->id])}}" class="btn bg-gradient-danger" onclick="return confirm('Tem certeza que deseja excluir?');"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach

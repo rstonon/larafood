@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ACL\{
     ModuleController,
     PermissionController,
     PermissionModuleController,
+    PlanModuleController,
 };
 
 use Illuminate\Routing\RouteGroup;
@@ -27,13 +28,21 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 Route::group(['prefix' => 'admin'], function () {
 
+
+
+    // Route Plans x Modules
+    Route::get('plans/{idPlan}/module/{idModule}/detach', [PlanModuleController::class, 'detachModulesPlan'])->name('plans.module.detach');
+    Route::post('plans/{idPlan}/modules/store', [PlanModuleController::class, 'attachModulesPlan'])->name('plans.modules.attach');
+    Route::any('plans/{idPlan}/modules/create', [PlanModuleController::class, 'modulesAvailable'])->name('plans.modules.available');
+    Route::get('plans/{idPlan}/modules', [PlanModuleController::class, 'modules'])->name('plans.modules');
+    Route::get('modules/{idModule}/plans', [PlanModuleController::class, 'plans'])->name('modules.plans');
+
     // Route Permissions x Modules
-
-
+    Route::get('modules/{idModule}/permission/{idPermission}/detach', [PermissionModuleController::class, 'detachPermissionsModule'])->name('modules.permissions.detach');
     Route::post('modules/{idModule}/permissions/store', [PermissionModuleController::class, 'attachPermissionsModule'])->name('modules.permissions.attach');
-    // Route::any('modules/{idModule}/permissions/search', [PermissionModuleController::class, 'permissionsAvailableSearch'])->name('modules.permissions.available.search');
     Route::any('modules/{idModule}/permissions/create', [PermissionModuleController::class, 'permissionsAvailable'])->name('modules.permissions.available');
     Route::get('modules/{idModule}/permissions', [PermissionModuleController::class, 'permissions'])->name('modules.permissions');
+    Route::get('permissions/{idPermission}/modules', [PermissionModuleController::class, 'modules'])->name('permissions.modules');
 
     // Route Permissions
     Route::any('permissions/search', [PermissionController::class, 'search'])->name('permissions.search');

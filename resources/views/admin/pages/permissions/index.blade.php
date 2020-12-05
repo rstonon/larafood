@@ -34,6 +34,7 @@
                     <tr>
                         <td>{{ $permission->name }}</td>
                         <td>
+                            <a href="{{ route('permissions.modules', $permission->id)}}" class="btn bg-gradient-primary"><i class="fas fa-id-badge"></i></a>
                             <a href="{{ route('permissions.show', $permission->id)}}" class="btn bg-gradient-warning"><i class="fas fa-eye"></i></a>
                             <a href="{{ route('permissions.edit', $permission->id)}}" class="btn bg-gradient-info"><i class="fas fa-edit"></i></a>
                         </td>

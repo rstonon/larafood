@@ -35,7 +35,7 @@
                     <tr>
                         <td>{{ $permission->name }}</td>
                         <td>
-                            <a href="{{ route('modules.edit', $module->id)}}" class="btn bg-gradient-danger"><i class="fas fa-trash"></i></a>
+                            <a href="{{ route('modules.permissions.detach', [$module->id, $permission->id])}}" class="btn bg-gradient-danger" onclick="return confirm('Tem certeza que deseja excluir?');"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach

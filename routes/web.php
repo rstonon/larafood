@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\ACL\{
     PermissionModuleController,
     PlanModuleController,
 };
-
+use App\Http\Controllers\Site\SiteController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -26,7 +26,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 |
 */
 
-Route::group(['prefix' => 'admin'], function () {
+Route::prefix('admin')
+            ->middleware('auth')
+            ->group(function () {
 
 
 
@@ -80,10 +82,12 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [SiteController::class, 'index'])->name('site.home');
 
-// Auth::routes();
+Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');

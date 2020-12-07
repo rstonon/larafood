@@ -13,7 +13,7 @@ class CreatePlanModuleTable extends Migration
      */
     public function up()
     {
-        Schema::create('plan_module', function (Blueprint $table) {
+        Schema::create('module_plan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('plan_id');
             $table->unsignedBigInteger('module_id');
@@ -30,6 +30,6 @@ class CreatePlanModuleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plan_module');
+        Schema::dropIfExists('module_plan');
     }
 }

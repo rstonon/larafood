@@ -3,14 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\{
+    Plan,
     Tenant,
-    User,
 };
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
-class UsersTableSeeder extends Seeder
+class TenantsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,12 +18,14 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $tenant = Tenant::first();
 
-        $tenant->users()->create([
-            'name' => 'Rafael Tonon',
+        $plan = Plan::first();
+
+        $plan->tenants()->create([
+            'cnpj' => '04048081000150',
+            'name' => 'Mejjihel Cosméticos',
+            'url' => 'mejjihel-cosmeticos',
             'email' => 'rstonon@gmail.com',
-            'password' => Hash::make('123456'),
         ]);
     }
 }

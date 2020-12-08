@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\{
+    CategoryController,
     DetailPlanController,
     PlanController,
     UserController
@@ -30,6 +31,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 Route::prefix('admin')
             ->middleware('auth')
             ->group(function () {
+
+    // Route Categories
+    Route::any('categories/search', [CategoryController::class, 'search'])->name('categories.search');
+    Route::resource('categories', CategoryController::class);
 
     // Route Users
     Route::any('users/search', [UserController::class, 'search'])->name('users.search');

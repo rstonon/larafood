@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\Admin\{
     DetailPlanController,
-    PlanController
+    PlanController,
+    UserController
 };
 use App\Http\Controllers\Admin\ACL\{
     ModuleController,
@@ -30,7 +31,9 @@ Route::prefix('admin')
             ->middleware('auth')
             ->group(function () {
 
-
+    // Route Users
+    Route::any('users/search', [UserController::class, 'search'])->name('users.search');
+    Route::resource('users', UserController::class);
 
     // Route Plans x Modules
     Route::get('plans/{idPlan}/module/{idModule}/detach', [PlanModuleController::class, 'detachModulesPlan'])->name('plans.module.detach');
@@ -81,9 +84,12 @@ Route::prefix('admin')
 });
 
 
-
+//Site
+Route::get('/plan/{url}', [SiteController::class, 'plan'])->name('plan.subscription');
 Route::get('/', [SiteController::class, 'index'])->name('site.home');
 
+
+//Authentication
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

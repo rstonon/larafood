@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\{
     CategoryController,
     DetailPlanController,
     PlanController,
+    ProductController,
     UserController
 };
 use App\Http\Controllers\Admin\ACL\{
@@ -31,6 +32,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 Route::prefix('admin')
             ->middleware('auth')
             ->group(function () {
+
+    // Route Products
+    Route::any('products/search', [ProductController::class, 'search'])->name('products.search');
+    Route::resource('products', ProductController::class);
 
     // Route Categories
     Route::any('categories/search', [CategoryController::class, 'search'])->name('categories.search');

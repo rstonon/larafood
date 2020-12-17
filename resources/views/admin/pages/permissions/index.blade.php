@@ -25,14 +25,14 @@
         <table class="table table-codensed">
             <thead>
                 <tr>
-                    <th>Nome</th>
+                    <th>Descrição</th>
                     <th width="200">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($permissions as $permission)
                     <tr>
-                        <td>{{ $permission->name }}</td>
+                        <td>{{ $permission->description }}</td>
                         <td>
                             <a href="{{ route('permissions.modules', $permission->id)}}" class="btn bg-gradient-primary"><i class="fas fa-id-badge"></i></a>
                             <a href="{{ route('permissions.show', $permission->id)}}" class="btn bg-gradient-warning"><i class="fas fa-eye"></i></a>

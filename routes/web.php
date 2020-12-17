@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\{
     DetailPlanController,
     PlanController,
     ProductController,
+    TableController,
     UserController
 };
 use App\Http\Controllers\Admin\ACL\{
@@ -33,6 +34,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 Route::prefix('admin')
             ->middleware('auth')
             ->group(function () {
+
+    // Route Tables
+    Route::any('tables/search', [TableController::class, 'search'])->name('tables.search');
+    Route::resource('tables', TableController::class);
 
     // Route Products x Categories
     Route::get('products/{idProduct}/category/{idCategory}/detach', [CategoryProductController::class, 'detachCategoriesProduct'])->name('products.category.detach');

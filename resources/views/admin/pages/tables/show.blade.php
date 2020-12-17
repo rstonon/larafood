@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Permissões')
+@section('title', 'Mesas')
 
 @section('content_header')
-    <h1>Permissão - <b>{{ $permission->name }}</b></h1>
+    <h1>Mesa - <b>{{ $table->identify }}</b></h1>
 @stop
 
 @section('content')
@@ -13,15 +13,15 @@
     <div class="card-body">
 
             <div class="form-group">
-                <label>Descrição:</label>
-                <input type="text" name="description" class="form-control" value="{{ $permission->description }}" disabled>
+                <label>Identificador:</label>
+            <input type="text" name="name" class="form-control" value="{{ $table->identify }}" disabled>
             </div>
             <div class="form-group">
-                <label>Nome:</label>
-                <input type="text" name="name" class="form-control" value="{{ $permission->name }}" disabled>
+                <label>Descrição:</label>
+                <textarea name="description" cols="30" rows="10" class="form-control" disabled>{{ $table->description }}</textarea>
             </div>
 
-        <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST">
+        <form action="{{ route('tables.destroy', $table->id) }}" method="POST">
             @csrf
             @method('DELETE')
             <div class="form-group">

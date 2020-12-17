@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Admin\ACL;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUpdateModule;
-use App\Models\Module;
+use App\Http\Requests\StoreUpdateTable;
+use App\Models\Table;
 use Illuminate\Http\Request;
 
-class ModuleController extends Controller
+class TableController extends Controller
 {
-    protected $repository;
+    private $repository;
 
-    public function __construct(Module $module)
+    public function __construct(Table $table)
     {
-        $this->repository = $module;
+        $this->repository = $table;
 
-        $this->middleware(['can:modules']);
+        $this->middleware(['can:tables']);
     }
 
     /**
@@ -25,10 +25,10 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $modules = $this->repository->paginate();
+        $tables = $this->repository->paginate();
 
-        return view('admin.pages.modules.index', [
-            'modules' => $modules,
+        return view('admin.pages.tables.index', [
+            'tables' => $tables,
         ]);
     }
 
@@ -39,7 +39,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.modules.create');
+        return view('admin.pages.tables.create');
     }
 
     /**
@@ -48,11 +48,13 @@ class ModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateModule $request)
+    public function store(StoreUpdateTable $request)
     {
-        $this->repository->create($request->all());
+        $data = $request->all();
 
-        return redirect()->route('modules.index')->with('toast_success', 'Módulo cadastrado com sucesso');
+        $this->repository->create($data);
+
+        return redirect()->route('tables.index')->with('toast_success', 'Mesa cadastrada com sucesso');
     }
 
     /**
@@ -63,12 +65,14 @@ class ModuleController extends Controller
      */
     public function show($id)
     {
-        if(!$module = $this->repository->find($id)) {
+        $table = $this->repository->find($id);
+
+        if(!$table) {
             return redirect()->back();
         }
 
-        return view('admin.pages.modules.show', [
-            'module' => $module,
+        return view('admin.pages.tables.show', [
+            'table' => $table,
         ]);
     }
 
@@ -80,12 +84,14 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
-        if(!$module = $this->repository->find($id)) {
+        $table = $this->repository->find($id);
+
+        if(!$table) {
             return redirect()->back();
         }
 
-        return view('admin.pages.modules.edit', [
-            'module' => $module,
+        return view('admin.pages.tables.edit', [
+            'table' => $table,
         ]);
     }
 
@@ -96,15 +102,19 @@ class ModuleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateModule $request, $id)
+    public function update(StoreUpdateTable $request, $id)
     {
-        if(!$module = $this->repository->find($id)) {
+        $table = $this->repository->find($id);
+
+        if(!$table) {
             return redirect()->back();
         }
 
-        $module->update($request->all());
+        $data = $request->all();
 
-        return redirect()->route('modules.index')->with('toast_success', 'Módulo editado com sucesso');
+        $table->update($data);
+
+        return redirect()->route('tables.index')->with('toast_success', 'Mesa editada com sucesso');
     }
 
     /**
@@ -115,23 +125,25 @@ class ModuleController extends Controller
      */
     public function destroy($id)
     {
-        if(!$module = $this->repository->find($id)) {
+        $table = $this->repository->find($id);
+
+        if(!$table) {
             return redirect()->back();
         }
 
-        $module->delete();
+        $table->delete();
 
-        return redirect()->route('modules.index')->with('toast_success', 'Módulo deletado com sucesso');
+        return redirect()->route('tables.index')->with('toast_success', 'Mesa deletada com sucesso');
     }
 
     public function search(Request $request)
     {
         $filters = $request->except('_token');
 
-        $modules = $this->repository->search($request->filter);
+        $tables = $this->repository->search($request->filter);
 
-        return view('admin.pages.modules.index', [
-            'modules' => $modules,
+        return view('admin.pages.tables.index', [
+            'tables' => $tables,
             'filters' => $filters,
         ]);
     }

@@ -26,14 +26,14 @@
         <table class="table table-codensed">
             <thead>
                 <tr>
-                    <th>Nome</th>
+                    <th>Descrição</th>
                     <th width="50">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($permissions as $permission)
                     <tr>
-                        <td>{{ $permission->name }}</td>
+                        <td>{{ $permission->description }}</td>
                         <td>
                             <a href="{{ route('modules.permissions.detach', [$module->id, $permission->id])}}" class="btn bg-gradient-danger" onclick="return confirm('Tem certeza que deseja excluir?');"><i class="fas fa-trash"></i></a>
                         </td>

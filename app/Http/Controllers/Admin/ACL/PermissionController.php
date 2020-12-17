@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\ACL;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdatePermission;
 use App\Models\Permission;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -14,6 +15,8 @@ class PermissionController extends Controller
     public function __construct(Permission $permission)
     {
         $this->repository = $permission;
+
+        $this->middleware(['can:permissions']);
     }
     /**
      * Display a listing of the resource.

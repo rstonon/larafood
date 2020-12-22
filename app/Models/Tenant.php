@@ -20,4 +20,14 @@ class Tenant extends Model
     {
         return $this->belongsTo(Plan::class);
     }
+
+    public function search($filter = null)
+    {
+        $results = $this
+                    ->where('name', 'LIKE', "%{$filter}%")
+                    ->orWhere('cnpj', 'LIKE', "%{$filter}%")
+                    ->paginate();
+
+        return $results;
+    }
 }

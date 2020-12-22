@@ -21,15 +21,15 @@
 
             <div class="form-group">
                 <label>Título:</label>
-                <input type="text" name="name" class="form-control" value="{{ $product->title }}" disabled>
+                <input type="text" name="title" class="form-control" value="{{ $product->title }}" disabled>
             </div>
             <div class="form-group">
                 <label>Flag:</label>
-                <input type="text" name="name" class="form-control" value="{{ $product->flag }}" disabled>
+                <input type="text" name="flag" class="form-control" value="{{ $product->flag }}" disabled>
             </div>
             <div class="form-group">
                 <label>Preço:</label>
-                <input type="text" name="name" class="form-control" value="{{ $product->price }}" disabled>
+                <input type="text" name="price" class="form-control" value="{{ $product->price }}" disabled>
             </div>
             <div class="form-group">
                 <label>Descrição:</label>

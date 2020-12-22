@@ -1,21 +1,22 @@
 @extends('adminlte::page')
 
-@section('title', "Permissões Disponíveis para o Módulo - {$module->name}")
+@section('title', "Permissões do Cargo - {$role->name}")
 
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('modules.index') }}">Módulos</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('modules.permissions', $module->id ) }}">Permissões</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">Cargos</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('roles.permissions', $role->id ) }}">Permissões</a></li>
     </ol>
 
-<h1>Permissões Disponíveis para o Módulo - <b>{{ $module->name }}</b></h1><br>
+<h1>Permissões do Cargo - <b>{{ $role->name }}</b></h1><br>
+    <a href="{{ route('roles.permissions.available', $role->id) }}" class="btn bg-gradient-primary"><i class="fas fa-plus-circle"></i> Adicionar Nova Permissão</a>
 
 @stop
 
 @section('content')
     <div class="card-header">
-    <form action="{{ route('modules.permissions.available', $module->id) }}" method="POST" class="form form-inline">
+    <form action="{{ route('roles.search') }}" method="POST" class="form form-inline">
             @csrf
     <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}">
             <button style="margin-left: 10px" type="submit" class="btn btn-outline-info"><i class="fas fa-search"></i> Pesquisar</button>
@@ -25,25 +26,19 @@
         <table class="table table-codensed">
             <thead>
                 <tr>
-                    <th width="50px">#</th>
                     <th>Descrição</th>
+                    <th width="50">Ações</th>
                 </tr>
             </thead>
             <tbody>
-            <form action="{{ route('modules.permissions.attach', $module->id) }}" method="post">
-                    @csrf
-                    @foreach ($permissions as $permission)
+                @foreach ($permissions as $permission)
                     <tr>
-                        <td><input type="checkbox" name="permissions[]" value="{{ $permission->id }}"></td>
                         <td>{{ $permission->description }}</td>
-                    </tr>
-                    @endforeach
-                    <tr>
-                        <td colspan="500">
-                            <button type="submit" class="btn bg-gradient-success"><i class="fas fa-save"></i> Salvar</button>
+                        <td>
+                            <a href="{{ route('roles.permissions.detach', [$role->id, $permission->id])}}" class="btn bg-gradient-danger" onclick="return confirm('Tem certeza que deseja excluir?');"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
-                </form>
+                @endforeach
             </tbody>
         </table>
     </div>

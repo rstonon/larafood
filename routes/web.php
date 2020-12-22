@@ -7,13 +7,17 @@ use App\Http\Controllers\Admin\{
     PlanController,
     ProductController,
     TableController,
+    TenantController,
     UserController
 };
 use App\Http\Controllers\Admin\ACL\{
     ModuleController,
     PermissionController,
     PermissionModuleController,
+    PermissionRoleController,
     PlanModuleController,
+    RoleController,
+    RoleUserController,
 };
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Routing\RouteGroup;
@@ -34,6 +38,28 @@ use RealRashid\SweetAlert\Facades\Alert;
 Route::prefix('admin')
             ->middleware('auth')
             ->group(function () {
+
+    // Route Role x User
+    Route::get('users/{id}/role/{idRole}/detach', [RoleUserController::class, 'detachRolesUser'])->name('users.roles.detach');
+    Route::post('users/{id}/roles/store', [RoleUserController::class, 'attachRolesUser'])->name('users.roles.attach');
+    Route::any('users/{id}/roles/create', [RoleUserController::class, 'rolesAvailable'])->name('users.roles.available');
+    Route::get('users/{id}/roles', [RoleUserController::class, 'roles'])->name('users.roles');
+    Route::get('roles/{idRole}/users', [RoleUserController::class, 'users'])->name('roles.users');
+
+    // Route Permissions x Roles
+    Route::get('roles/{id}/permission/{idPermission}/detach', [PermissionRoleController::class, 'detachPermissionsRole'])->name('roles.permissions.detach');
+    Route::post('roles/{id}/permissions/store', [PermissionRoleController::class, 'attachPermissionsRole'])->name('roles.permissions.attach');
+    Route::any('roles/{id}/permissions/create', [PermissionRoleController::class, 'permissionsAvailable'])->name('roles.permissions.available');
+    Route::get('roles/{id}/permissions', [PermissionRoleController::class, 'permissions'])->name('roles.permissions');
+    Route::get('permissions/{idPermission}/role', [PermissionRoleController::class, 'roles'])->name('permissions.roles');
+
+    // Route Roles
+    Route::any('roles/search', [RoleController::class, 'search'])->name('roles.search');
+    Route::resource('roles', RoleController::class);
+
+    // Route Tenants
+    Route::any('tenants/search', [TenantController::class, 'search'])->name('tenants.search');
+    Route::resource('tenants', TenantController::class);
 
     // Route Tables
     Route::any('tables/search', [TableController::class, 'search'])->name('tables.search');

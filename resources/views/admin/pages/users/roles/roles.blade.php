@@ -1,23 +1,20 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuários')
+@section('title', "Cargos do Usuário - {$user->name}")
 
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('users.index') }}">Usuários</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Usuários</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('users.roles', $user->id ) }}">Cargos</a></li>
     </ol>
 
-    <h1>Usuários</h1><br>
-    <a href="{{ route('users.create') }}" class="btn bg-gradient-primary"><i class="fas fa-plus-circle"></i> Adicionar Novo Plano</a>
+<h1>Cargos do Usuário - <b>{{ $user->name }}</b></h1><br>
+    <a href="{{ route('users.roles.available', $user->id) }}" class="btn bg-gradient-primary"><i class="fas fa-plus-circle"></i> Adicionar Novo Cargo</a>
 
 @stop
 
 @section('content')
-
-    @include('admin.includes.alerts')
-
-
     <div class="card-header">
     <form action="{{ route('users.search') }}" method="POST" class="form form-inline">
             @csrf
@@ -30,19 +27,15 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>E-mail</th>
-                    <th width="200">Ações</th>
+                    <th width="50">Ações</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($roles as $role)
                     <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
+                        <td>{{ $role->name }}</td>
                         <td>
-                            <a href="{{ route('users.roles', $user->id)}}" class="btn bg-gradient-primary"><i class="fas fa-address-card"></i></a>
-                            <a href="{{ route('users.show', $user->id)}}" class="btn bg-gradient-warning"><i class="fas fa-eye"></i></a>
-                            <a href="{{ route('users.edit', $user->id)}}" class="btn bg-gradient-info"><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('users.roles.detach', [$user->id, $role->id])}}" class="btn bg-gradient-danger" onclick="return confirm('Tem certeza que deseja excluir?');"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -51,10 +44,11 @@
     </div>
     <div class="card-footer">
         @if (isset($filters))
-            {{ $users->appends($filters)->links() }}
+            {{ $roles->appends($filters)->links() }}
         @else
-            {{ $users->links() }}
+            {{ $roles->links() }}
         @endif
+
     </div>
     @include('sweetalert::alert')
 @stop

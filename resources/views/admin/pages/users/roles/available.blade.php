@@ -1,21 +1,21 @@
 @extends('adminlte::page')
 
-@section('title', "Permissões Disponíveis para o Módulo - {$module->name}")
+@section('title', "Cargos Disponíveis para o Cargo - {$user->name}")
 
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('modules.index') }}">Módulos</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('modules.permissions', $module->id ) }}">Permissões</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Usuários</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('users.roles', $user->id ) }}">Cargos</a></li>
     </ol>
 
-<h1>Permissões Disponíveis para o Módulo - <b>{{ $module->name }}</b></h1><br>
+<h1>Cargos Disponíveis para o Cargo - <b>{{ $user->name }}</b></h1><br>
 
 @stop
 
 @section('content')
     <div class="card-header">
-    <form action="{{ route('modules.permissions.available', $module->id) }}" method="POST" class="form form-inline">
+    <form action="{{ route('users.roles.available', $user->id) }}" method="POST" class="form form-inline">
             @csrf
     <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}">
             <button style="margin-left: 10px" type="submit" class="btn btn-outline-info"><i class="fas fa-search"></i> Pesquisar</button>
@@ -26,16 +26,16 @@
             <thead>
                 <tr>
                     <th width="50px">#</th>
-                    <th>Descrição</th>
+                    <th>Nome</th>
                 </tr>
             </thead>
             <tbody>
-            <form action="{{ route('modules.permissions.attach', $module->id) }}" method="post">
+            <form action="{{ route('users.roles.attach', $user->id) }}" method="post">
                     @csrf
-                    @foreach ($permissions as $permission)
+                    @foreach ($roles as $role)
                     <tr>
-                        <td><input type="checkbox" name="permissions[]" value="{{ $permission->id }}"></td>
-                        <td>{{ $permission->description }}</td>
+                        <td><input type="checkbox" name="roles[]" value="{{ $role->id }}"></td>
+                        <td>{{ $role->name }}</td>
                     </tr>
                     @endforeach
                     <tr>
@@ -49,9 +49,9 @@
     </div>
     <div class="card-footer">
         @if (isset($filters))
-            {{ $permissions->appends($filters)->links() }}
+            {{ $roles->appends($filters)->links() }}
         @else
-            {{ $permissions->links() }}
+            {{ $roles->links() }}
         @endif
 
     </div>

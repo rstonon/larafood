@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuários')
+@section('title', 'Cargos')
 
 @section('content_header')
-    <h1>Cadastrar Novo Usuário</h1>
+    <h1>Cadastrar Novo Cargo</h1>
 @stop
 
 @section('content')
@@ -11,10 +11,9 @@
 
     </div>
     <div class="card-body">
-        <form action="{{ route('users.store') }}" class="form" method="POST">
+        <form action="{{ route('roles.store') }}" class="form" method="POST">
 
-            @include('admin.pages.users._partials.form')
-
+            @include('admin.pages.roles._partials.form')
 
         </form>
     </div>

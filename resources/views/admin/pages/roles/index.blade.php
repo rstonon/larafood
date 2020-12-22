@@ -1,25 +1,21 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuários')
+@section('title', 'Cargos')
 
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('users.index') }}">Usuários</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('roles.index') }}">Cargos</a></li>
     </ol>
 
-    <h1>Usuários</h1><br>
-    <a href="{{ route('users.create') }}" class="btn bg-gradient-primary"><i class="fas fa-plus-circle"></i> Adicionar Novo Plano</a>
+    <h1>Cargos</h1><br>
+    <a href="{{ route('roles.create') }}" class="btn bg-gradient-primary"><i class="fas fa-plus-circle"></i> Adicionar Novo Módulo</a>
 
 @stop
 
 @section('content')
-
-    @include('admin.includes.alerts')
-
-
     <div class="card-header">
-    <form action="{{ route('users.search') }}" method="POST" class="form form-inline">
+    <form action="{{ route('roles.search') }}" method="POST" class="form form-inline">
             @csrf
     <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}">
             <button style="margin-left: 10px" type="submit" class="btn btn-outline-info"><i class="fas fa-search"></i> Pesquisar</button>
@@ -30,19 +26,17 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>E-mail</th>
                     <th width="200">Ações</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($roles as $role)
                     <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
+                        <td>{{ $role->name }}</td>
                         <td>
-                            <a href="{{ route('users.roles', $user->id)}}" class="btn bg-gradient-primary"><i class="fas fa-address-card"></i></a>
-                            <a href="{{ route('users.show', $user->id)}}" class="btn bg-gradient-warning"><i class="fas fa-eye"></i></a>
-                            <a href="{{ route('users.edit', $user->id)}}" class="btn bg-gradient-info"><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('roles.permissions', $role->id)}}" class="btn bg-gradient-primary"><i class="fas fa-key"></i></a>
+                            <a href="{{ route('roles.show', $role->id)}}" class="btn bg-gradient-warning"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('roles.edit', $role->id)}}" class="btn bg-gradient-info"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -51,10 +45,11 @@
     </div>
     <div class="card-footer">
         @if (isset($filters))
-            {{ $users->appends($filters)->links() }}
+            {{ $roles->appends($filters)->links() }}
         @else
-            {{ $users->links() }}
+            {{ $roles->links() }}
         @endif
+
     </div>
     @include('sweetalert::alert')
 @stop

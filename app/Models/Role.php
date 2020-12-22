@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Module extends Model
+class Role extends Model
 {
     use HasFactory;
 
@@ -27,17 +27,17 @@ class Module extends Model
         return $this->belongsToMany(Permission::class);
     }
 
-    public function plans()
+    public function users()
     {
-        return $this->belongsToMany(Plan::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function permissionsAvailable($filter = null)
     {
         $permissions = Permission::whereNotIn('permissions.id', function($query) {
-            $query->select('module_permission.permission_id');
-            $query->from('module_permission');
-            $query->whereRaw("module_permission.module_id={$this->id}");
+            $query->select('permission_role.permission_id');
+            $query->from('permission_role');
+            $query->whereRaw("permission_role.role_id={$this->id}");
         })
         ->where(function($queryFilter) use ($filter) {
             if ($filter) {
@@ -48,5 +48,4 @@ class Module extends Model
 
         return $permissions;
     }
-
 }

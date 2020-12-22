@@ -1,21 +1,21 @@
 @extends('adminlte::page')
 
-@section('title', "Permissões Disponíveis para o Módulo - {$module->name}")
+@section('title', "Permissões Disponíveis para o Cargo - {$role->name}")
 
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('modules.index') }}">Módulos</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('modules.permissions', $module->id ) }}">Permissões</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">Cargos</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('roles.permissions', $role->id ) }}">Permissões</a></li>
     </ol>
 
-<h1>Permissões Disponíveis para o Módulo - <b>{{ $module->name }}</b></h1><br>
+<h1>Permissões Disponíveis para o Cargo - <b>{{ $role->name }}</b></h1><br>
 
 @stop
 
 @section('content')
     <div class="card-header">
-    <form action="{{ route('modules.permissions.available', $module->id) }}" method="POST" class="form form-inline">
+    <form action="{{ route('roles.permissions.available', $role->id) }}" method="POST" class="form form-inline">
             @csrf
     <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}">
             <button style="margin-left: 10px" type="submit" class="btn btn-outline-info"><i class="fas fa-search"></i> Pesquisar</button>
@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-            <form action="{{ route('modules.permissions.attach', $module->id) }}" method="post">
+            <form action="{{ route('roles.permissions.attach', $role->id) }}" method="post">
                     @csrf
                     @foreach ($permissions as $permission)
                     <tr>

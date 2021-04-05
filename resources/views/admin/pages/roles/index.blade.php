@@ -9,7 +9,7 @@
     </ol>
 
     <h1>Cargos</h1><br>
-    <a href="{{ route('roles.create') }}" class="btn bg-gradient-primary"><i class="fas fa-plus-circle"></i> Adicionar Novo Módulo</a>
+    <a href="{{ route('roles.create') }}" class="btn bg-gradient-primary"><i class="fas fa-plus-circle"></i> Adicionar Novo Cargo</a>
 
 @stop
 

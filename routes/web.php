@@ -20,9 +20,8 @@ use App\Http\Controllers\Admin\ACL\{
     RoleUserController,
 };
 use App\Http\Controllers\Site\SiteController;
-use Illuminate\Routing\RouteGroup;
+use App\Models\Client;
 use Illuminate\Support\Facades\Route;
-use RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +33,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('teste', function () {
+    $client = Client::first();
+
+    $token = $client->createToken('token-teste');
+
+    dd($token->plainTextToken);
+});
 
 Route::prefix('admin')
             ->middleware('auth')

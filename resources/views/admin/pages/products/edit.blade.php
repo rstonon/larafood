@@ -16,6 +16,10 @@
             @method('PUT')
 
             @include('admin.pages.products._partials.form')
+
+            <div class="form-group">
+                <button type="submit" class="btn bg-gradient-success"><i class="fas fa-save"></i> Salvar</button>
+            </div>
         </form>
     </div>
     @include('sweetalert::alert')

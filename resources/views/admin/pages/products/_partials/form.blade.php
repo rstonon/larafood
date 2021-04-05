@@ -16,6 +16,7 @@
     <label>Descrição:</label>
     <textarea name="description" cols="30" rows="10" class="form-control" placeholder="Descrição">{{ $product->description ?? old('description') }}</textarea>
 </div>
-<div class="form-group">
+
+{{-- <div class="form-group">
     <button type="submit" class="btn bg-gradient-success"><i class="fas fa-save"></i> Salvar</button>
-</div>
+</div> --}}

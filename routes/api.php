@@ -20,6 +20,9 @@ Route::group([
 ], function() {
     Route::get('/auth/me', [AuthClientController::class, 'me']);
     Route::post('/auth/logout', [AuthClientController::class, 'logout']);
+
+    Route::get('/auth/v1/myorders', [OrderApiController::class, 'myOrders']);
+    Route::post('/auth/v1/orders', [OrderApiController::class, 'store']);
 });
 
 

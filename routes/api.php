@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\{
     CategoryApiController,
+    OrderApiController,
     ProductApiController,
     TableApiController,
     TenantApiController
@@ -40,6 +41,9 @@ Route::get('/products/{identify}', [ProductApiController::class, 'show']);
 Route::get('/products', [ProductApiController::class, 'productsByTenant']);
 
 Route::post('/client', [RegisterController::class, 'store']);
+
+Route::post('/orders', [OrderApiController::class, 'store']);
+Route::get('/orders/{identify}', [OrderApiController::class, 'show']);
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

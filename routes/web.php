@@ -1,15 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\{
-    CategoryController,
+use App\Http\Controllers\Admin\{CategoryController,
     CategoryProductController,
+    DashboardController,
     DetailPlanController,
     PlanController,
     ProductController,
     TableController,
     TenantController,
-    UserController
-};
+    UserController};
 use App\Http\Controllers\Admin\ACL\{
     ModuleController,
     PermissionController,
@@ -137,7 +136,7 @@ Route::prefix('admin')
 
 
     // Home Dashboard
-    Route::get('/', [PlanController::class, 'index'])->name('admin.index');
+    Route::get('/', [DashboardController::class, 'home'])->name('admin.index');
 });
 
 

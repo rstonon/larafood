@@ -11,8 +11,8 @@ use App\Http\Controllers\Api\Auth\AuthClientController;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
-Route::post('/sanctum/token', [AuthClientController::class, 'auth']);
+Route::post('/auth/register', [RegisterController::class, 'store']);
+Route::post('/auth/token', [AuthClientController::class, 'auth']);
 
 Route::group([
     'middleware' => ['auth:sanctum']
@@ -43,8 +43,6 @@ Route::get('/tables', [TableApiController::class, 'tablesByTenant']);
 
 Route::get('/products/{identify}', [ProductApiController::class, 'show']);
 Route::get('/products', [ProductApiController::class, 'productsByTenant']);
-
-Route::post('/client', [RegisterController::class, 'store']);
 
 Route::post('/orders', [OrderApiController::class, 'store']);
 Route::get('/orders/{identify}', [OrderApiController::class, 'show']);

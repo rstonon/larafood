@@ -4,8 +4,6 @@ namespace Tests\Feature\Api;
 
 use App\Models\Product;
 use App\Models\Tenant;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ProductTest extends TestCase

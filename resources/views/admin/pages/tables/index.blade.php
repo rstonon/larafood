@@ -36,6 +36,7 @@
                         <td>{{ $table->identify }}</td>
                         <td>{{ $table->description }}</td>
                         <td>
+                            <a href="{{ route('tables.qrcode', $table->identify)}}" class="btn btn-primary" target="_blank"><i class="fas fa-qrcode"></i></a>
                             <a href="{{ route('tables.show', $table->id)}}" class="btn bg-gradient-warning"><i class="fas fa-eye"></i></a>
                             <a href="{{ route('tables.edit', $table->id)}}" class="btn bg-gradient-info"><i class="fas fa-edit"></i></a>
                         </td>

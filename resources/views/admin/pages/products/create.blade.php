@@ -32,7 +32,7 @@
                     @include('admin.pages.products._partials.form')
                 </div>
                 <div class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">...</div> --}}
+                <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">...</div>
             </div>
 
             <div class="form-group">

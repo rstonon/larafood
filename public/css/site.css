@@ -1,3 +1,7 @@
+body {
+    background-color: #000;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -5,7 +9,7 @@ a:hover {
     font-family: 'Lato', sans-serif;
     text-align: center;
     font-size: 4em;
-    color: #B63132;
+    color: #ffffff;
     margin: 26px 0;
 }
 .pricingTable{
@@ -14,13 +18,13 @@ a:hover {
     margin: 0 15px;
 }
 .pricingTable .pricing-content{
-    background-color: #fff;
+    background-color: #1b1b1b;
     padding: 15px 10px 10px;
     margin: 0 0 10px;
     border-radius: 0 70px 0 0;
 }
 .pricingTable .title{
-    color: #B63132;
+    color: #f9f9f9;
     font-size: 27px;
     font-weight: 800;
     text-transform: uppercase;
@@ -41,14 +45,14 @@ a:hover {
     padding: 20px 5px 15px 0;
     margin: 0 0 15px;
     border-radius: 0 100px 100px 0;
-    border: 7px solid #fff;
+    border: 7px solid #1b1b1b;
     border-left: none;
     position: relative;
     z-index: 1;
 }
 .pricingTable .price-value:before{
     content: '';
-    background: #fff;
+    background: #1b1b1b;
     border-radius: 0 100px 100px 0;
     position: absolute;
     left: 5px;
@@ -101,21 +105,22 @@ a:hover {
     left: -20px;
     top: 0;
     bottom: 0;
+    -webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
 .pricingTable .pricingTable-signup{
     background: linear-gradient(to bottom, #de2426, #773b3b);
     padding: 10px 0;
     border-radius:0 0 0 50px;
-    border: 9px solid #fff;
+    border: 9px solid #1b1b1b;
 }
 .pricingTable .pricingTable-signup a{
-    color: #fff;
+    color: #1b1b1b;
     font-size: 25px;
     font-weight: 800;
     text-transform: uppercase;
     padding: 7px 25px;
-    border: 2px solid #fff;
+    border: 2px solid #1b1b1b;
     border-radius: 50px;
     display: inline-block;
     transition: all 0.3s;

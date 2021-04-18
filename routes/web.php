@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\{CategoryController,
     CategoryProductController,
     DashboardController,
     DetailPlanController,
+    OrderController,
     PlanController,
     ProductController,
     TableController,
@@ -44,6 +45,9 @@ Route::get('teste', function () {
 Route::prefix('admin')
             ->middleware('auth')
             ->group(function () {
+
+    // Route Orders
+    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
 
     // Route Role x User
     Route::get('users/{id}/role/{idRole}/detach', [RoleUserController::class, 'detachRolesUser'])->name('users.roles.detach');

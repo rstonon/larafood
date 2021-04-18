@@ -16,4 +16,6 @@ mix.js('resources/js/app.js', 'public/js')
         require('postcss-import'),
         require('tailwindcss'),
     ])
+    .postCss('resources/css/custom-dash.css', 'public/css', [])
+    .postCss('resources/css/site.css', 'public/css', [])
     .webpackConfig(require('./webpack.config'));
